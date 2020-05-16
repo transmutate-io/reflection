@@ -98,7 +98,7 @@ func CopyFields(src, dst Any) error {
 			}
 		}
 		// set value
-		vd.FieldByName(dfld.Name).Set(vs.Field(i))
+		vd.Field(i).Set(vs.FieldByName(sfld.Name))
 	}
 	return nil
 }

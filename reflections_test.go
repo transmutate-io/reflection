@@ -66,3 +66,23 @@ func TestReflections(t *testing.T) {
 	require.NoError(t, err, "unexpected error")
 	require.Equal(t, fld1, fld2, "field mismatch")
 }
+
+func TestCopyFields(t *testing.T) {
+	a := &struct {
+		A string
+		B int
+		C float64
+	}{"hello world", 42, 3.14}
+	b := NewStructBuilder().WithField("C", float64(1), "").BuildPointer()
+	err := CopyFields(a, b)
+	require.NoError(t, err, "can't copy fields")
+	t.Logf(":: %#v\n", a)
+	t.Logf(":: %#v\n", b)
+	c := NewStructBuilder().
+		WithField("A", "", "").
+		WithField("B", int(0), "").
+		BuildPointer()
+	err = CopyFields(a, c)
+	require.NoError(t, err, "can't copy fields")
+	t.Logf(":: %#v\n", c)
+}
