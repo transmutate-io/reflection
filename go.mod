@@ -1,4 +1,4 @@
-module transmutate.io/pkg/reflections
+module github.com/transmutate-io/reflection
 
 go 1.14
 
